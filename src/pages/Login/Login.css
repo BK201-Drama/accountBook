@@ -1,0 +1,17 @@
+.myImg {
+  width: 100%;
+  float: none;
+}
+
+.FormBox {
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  margin-top: -460px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+.loginText {
+  text-align: center;
+}
