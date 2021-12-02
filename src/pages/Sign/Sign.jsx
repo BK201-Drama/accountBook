@@ -9,7 +9,7 @@ export default class Sign extends Component {
   }
 
   form = React.createRef()
-  
+
   render() {
     return (
       <>
@@ -20,8 +20,8 @@ export default class Sign extends Component {
         <div className={"FormBox"}>
           <h3 className={"loginText"}>Sign</h3>
           <Form
-            ref={this.form}
-            onFinish={this.onFinish}
+            ref={ this.form }
+            onFinish={ this.onFinish }
             footer={
               <div style={{ margin: '16px 16px 0' }}>
                 <Button round nativeType="submit" type="primary" block>

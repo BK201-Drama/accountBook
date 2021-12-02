@@ -7,24 +7,21 @@ export default class Login extends Component {
   onFinish = (value) => {
     console.log(value)
   }
-
-  sign = () => {
-    this.props.history.push('/user/sign')
-  }
-
+  
   form = React.createRef()
+
   render() {
     return (
       <>
-        <div className={"myImg"}>
-          <img src={Img} className={"myImg"} />
+        <div>
+          <img src={Img} className={"myImg"}/>
         </div>
 
         <div className={"FormBox"}>
           <h3 className={"loginText"}>Login</h3>
           <Form
-            ref={this.form}
-            onFinish={this.onFinish}
+            ref={ this.form }
+            onFinish={ this.onFinish }
             footer={
               <div style={{ margin: '16px 16px 0' }}>
                 <Button round nativeType="submit" type="primary" block>
@@ -50,7 +47,7 @@ export default class Login extends Component {
 
             <Form.Item
             >
-              <a style={{color: 'blue', fontSize: 6}} onClick={this.sign}>还没注册?点我</a>
+              <a style={{color: 'blue', fontSize: 6}}>还没注册?点我</a>
             </Form.Item>
           </Form>
         </div>
