@@ -2,18 +2,18 @@
   width: 100%;
   height: 800;
   float: none;
-  /* z-index: 1; */
-  /* background-repeat: no-repeat; */
-  /* background-size: 100%; */
-  /* background: fixed; */
-  /* background-color: aqua; */
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background: fixed;
+  background-color: aqua;
 }
 
 .FormBox {
   background-color: #fff;
   position: absolute;
   width: 100%;
-  margin-top: -100px;
+  margin-top: -135%;
   padding-top: 10px;
   padding-bottom: 30px;
 }

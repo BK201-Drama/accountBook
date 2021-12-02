@@ -9,7 +9,7 @@ export default function PageContainer () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login/>} exact/>
+        <Route path="/" element={<Login />} exact/>
         <Route path="/user/login" element={<Login />} exact/>
         <Route path="user/sign" element={<Sign />} exact/>
         {/* 重定向的新型写法 */}

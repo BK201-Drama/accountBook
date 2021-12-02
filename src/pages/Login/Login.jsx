@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Form, Button, Field } from 'react-vant'
 import Img from '../../assets/img/LoginBackground.png'
 import './Login.css'
+import * as LoginAPI from '../../api/Login/LoginAPI'
 
 export default class Login extends Component {
-  onFinish = (value) => {
+  onFinish = async (value) => {
     console.log(value)
   }
   
@@ -13,9 +14,7 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <div>
-          <img src={Img} className={"myImg"}/>
-        </div>
+        <img src={Img} className={"myImg"} alt=""/>
 
         <div className={"FormBox"}>
           <h3 className={"loginText"}>Login</h3>
@@ -47,7 +46,7 @@ export default class Login extends Component {
 
             <Form.Item
             >
-              <a style={{color: 'blue', fontSize: 6}}>还没注册?点我</a>
+              <a style={{color: 'blue', fontSize: 6}} href="/user/sign">还没注册?点我</a>
             </Form.Item>
           </Form>
         </div>

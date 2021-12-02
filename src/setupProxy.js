@@ -6,7 +6,7 @@ module.exports = function(app){
     '/api',
     createProxyMiddleware({
       target: 'http://106.55.188.184:8080/ssmBillBook/',
-      changeOrigin: true, 
+      changeOrigin: true,
     })
   )
 }

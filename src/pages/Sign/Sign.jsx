@@ -6,6 +6,10 @@ import './Sign.css'
 export default class Sign extends Component {
   onFinish = (value) => {
     console.log(value)
+
+    console.log('====================')
+    this.props.history.push('/user/login')
+    console.log('====================')
   }
 
   form = React.createRef()
@@ -14,7 +18,7 @@ export default class Sign extends Component {
     return (
       <>
         <div>
-          <img src={Img} className={"myImg"}/>
+          <img src={Img} className={"myImg"} alt=""/>
         </div>
 
         <div className={"FormBox"}>
