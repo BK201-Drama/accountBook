@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import Img from '../../assets/img/LoginBackground.png'
 import { Form, Button, Field } from 'react-vant'
+import './Sign.css'
 
 export default class Sign extends Component {
   onFinish = (value) => {
     console.log(value)
   }
+
   form = React.createRef()
+  
   render() {
     return (
       <>
