@@ -6,14 +6,14 @@
   /* background-repeat: no-repeat; */
   /* background-size: 100%; */
   /* background: fixed; */
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .FormBox {
   background-color: #fff;
   position: absolute;
   width: 100%;
-  margin-top: -170%;
+  margin-top: 50px;
   padding-top: 10px;
   padding-bottom: 30px;
 }

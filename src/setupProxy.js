@@ -5,7 +5,7 @@ module.exports = function(app){
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://120.77.57.222:8889/api/private/v1/',
+      target: 'http://106.55.188.184:8080/ssmBillBook/',
       changeOrigin: true, 
     })
   )
