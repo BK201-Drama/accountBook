@@ -6,15 +6,15 @@ import { Form, Button, Field, Notify } from 'react-vant'
 export default function Nav () {
   return (
     <Tabbar>
-      <Tabbar.Item icon="home-o">标签</Tabbar.Item>
+      <Tabbar.Item icon="home-o">明细</Tabbar.Item>
       <Tabbar.Item badge={{ dot: true }} icon="search">
-        标签
+        图表
       </Tabbar.Item>
       <Tabbar.Item badge={{ content: 5 }} icon="friends-o">
-        标签
+        记账
       </Tabbar.Item>
       <Tabbar.Item badge={{ content: 20 }} icon="setting-o">
-        标签
+        我的
       </Tabbar.Item>
     </Tabbar>
   )

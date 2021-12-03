@@ -16,7 +16,10 @@ export default function Login () {
     console.log(value)
     const k = await LoginAPI.userLogin(value)
     console.log(k)
-    navigate('/user/Tabbar')
+      // 设置一个token
+    localStorage.setItem('token', 'set_a_token')
+
+    navigate('/user/booking')
   }
 
   const rks = () => {
