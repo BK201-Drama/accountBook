@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Booking () {
+export default function Charts () {
   return (
     <div>
-      Booking
+      Charts
     </div>
   )
 }

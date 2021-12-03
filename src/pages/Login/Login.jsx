@@ -14,12 +14,18 @@ export default function Login () {
 
   const onFinish = async (value) => {
     console.log(value)
-    const k = await LoginAPI.userLogin(value)
-    console.log(k)
-      // 设置一个token
-    localStorage.setItem('token', 'set_a_token')
+    const res = await LoginAPI.userLogin(value)
+    console.log(res)
 
-    navigate('/user/booking')
+    if(res.status < 200) {
+      Notify.show({
+        type: 'success',
+        message: "登录成功",
+        duration: 1000
+      })
+    }
+
+    navigate('/Booking')
   }
 
   const rks = () => {

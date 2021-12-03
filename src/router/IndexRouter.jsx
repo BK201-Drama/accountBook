@@ -11,6 +11,8 @@ export default function IndexRouter () {
       <Routes>
         <Route path="/" element={<Login />} exact/>
         {/* 一些不想要展示tabbar的栏目，我们可以在这里渲染 */}
+
+        {/* ================================================= */}
         <Route path="*" element={<PageContainer/>} exact/>
       </Routes>
     </HashRouter>
