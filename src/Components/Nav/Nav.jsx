@@ -3,14 +3,15 @@ import { NavBar, ConfigProvider } from 'react-vant'
 // css是跟RN一样的思维，用一个容器去集中管理
 const themeVars = {
   '--rv-nav-bar-background-color': "rgb(246, 130, 115)",
-  '--rv-nav-bar-title-text-color': "#fff"
+  '--rv-nav-bar-title-text-color': "#fff",
+  '--rv-nav-bar-height': '50px'
 }
 
 export default function Nav_ () {
   return (
     <ConfigProvider themeVars={themeVars}>
       <NavBar
-        title="钱多多"
+        title="钱多多记账"
         // leftArrow
         // rightText="按钮"
         // onClickLeft={() => Toast.info('返回')}

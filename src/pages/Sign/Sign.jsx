@@ -13,18 +13,33 @@ export default function Sign () {
   const navigate = useNavigate()
 
   const onFinish = async (value) => {
-    console.log(value)
-    const k = await LoginAPI.userLogin(value)
-    console.log(k)
+    if (!value.username || !value.password || !value.mail) {
+      Notify.show({
+        type: 'danger',
+        message: "信息填写不完全！",
+        duration: 1000
+      })
+      return
+    }
+
+    // 如果都填写正常的话，就发请求
+    var res = await LoginAPI.userSign(value)
+    if(res.status < 200) {
+      Notify.show({
+        type: 'success',
+        message: "注册成功！",
+        duration: 1000
+      })
+      navigate('/user/login')
+    } else if (res.status === 200) {
+      Notify.show({
+        type: 'danger',
+        message: "用户名已经存在，请继续注册！",
+        duration: 1000
+      })
+    }
   }
 
-  const rks = () => {
-    Notify.show({
-      message: "danger",
-      duration: 1000
-    })
-    navigate('/user/sign')
-  }
   
   const [form] = Form.useForm()
 
@@ -32,7 +47,7 @@ export default function Sign () {
     <>
       <img src={Img} className={"myImg"} alt=""/>
       <div className={"FormBox"}>
-        <h3 className={"loginText"}>Login</h3>
+        <h3 className={"loginText"}>Sign</h3>
         <Form
           form={ form }
           onFinish={ onFinish }
@@ -46,20 +61,23 @@ export default function Sign () {
         >
           <Form.Item
             name="username"
-            label="账号"
+            label="注册账号"
           >
-            <Field placeholder="请输入你的账号" />
+            <Field placeholder="请输入你想注册的账号" />
           </Form.Item>
           <Form.Item
             name="password"
             label="密码"
             // rules={[{ pattern: /\d{6}/, message: '密码不能为空' }]}
           >
-            <Field placeholder="请输入你的密码" />
+            <Field placeholder="请输入你想注册的密码" />
           </Form.Item>
           <Form.Item
+            name="mail"
+            label="注册邮箱"
+            // rules={[{ pattern: /\d{6}/, message: '密码不能为空' }]}
           >
-            <a style={{color: 'blue', fontSize: 6}} onClick={ rks }>还没注册?点我</a>
+            <Field placeholder="请输入你的邮箱" />
           </Form.Item>
         </Form>
       </div>

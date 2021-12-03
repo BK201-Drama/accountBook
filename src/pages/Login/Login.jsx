@@ -23,19 +23,24 @@ export default function Login () {
         message: "登录成功",
         duration: 1000
       })
+      navigate('/Booking')
+    } else {
+      Notify.show({
+        type: 'danger',
+        message: "账号密码错误",
+        duration: 1000
+      })
     }
-
-    navigate('/Booking')
   }
 
   const rks = () => {
-    Notify.show({
-      message: "danger",
-      duration: 1000
-    })
     navigate('/user/sign')
   }
   
+  const forget = () => {
+    navigate('/user/forgetPw')
+  }
+
   const [form] = Form.useForm()
 
   return (
@@ -70,6 +75,7 @@ export default function Login () {
           <Form.Item
           >
             <a style={{color: 'blue', fontSize: 6}} onClick={ rks }>还没注册?点我</a>
+            <a style={{color: 'blue', fontSize: 6, marginLeft: 200}} onClick={ forget }>忘记密码</a>
           </Form.Item>
         </Form>
       </div>

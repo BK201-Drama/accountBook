@@ -1,13 +1,14 @@
 import react, { useState } from 'react';
 import { Tabbar, ConfigProvider } from 'react-vant'
 import { useNavigate } from 'react-router-dom'
-import { Form, Button, Field, Notify } from 'react-vant'
+// import { Form, Button, Field, Notify } from 'react-vant'
 
 const themeVars = {
   '--rv-tabbar-background-color': "rgb(103, 194, 179)",
   '--rv-tabbar-item-text-color': '#fff',
   '--rv-tabbar-item-active-color': "rgb(246, 130, 115)",
-  '--rv-tabbar-item-active-background-color': 'rgb(103, 194, 179)'
+  '--rv-tabbar-item-active-background-color': 'rgb(103, 194, 179)',
+  '--rv-tabbar-height': '60px'
 }
 
 export default function Tabbar_ () {

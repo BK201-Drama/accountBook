@@ -20,7 +20,6 @@ export default function PageContainer () {
       <Routes>
         <Route path="/" element={<Login />} exact/>
         <Route path="/user/login" element={<Login />} exact/>
-        <Route path="/user/sign" element={<Sign />} exact/>
 
 
         <Route path="/BillDetails" element={<BillDetails />} exact/>
