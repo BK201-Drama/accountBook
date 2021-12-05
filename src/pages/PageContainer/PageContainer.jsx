@@ -11,6 +11,7 @@ import Booking from './Booking/Booking'
 import BillDetails from './BillDetails/BillDetails'
 import Charts from './Charts/Charts'
 import MyZone from './MyZone/MyZone'
+import Error from './Error/Error'
 
 export default function PageContainer () {
   return (
@@ -28,6 +29,8 @@ export default function PageContainer () {
           <Route path="/MyZone" element={<MyZone />} exact/>
           {/* 重定向的新型写法 */}
           {/* <Redirect from="/" to="/user/login" /> */}
+
+          <Route path="*" element={<Error />} exact/>
         </Routes>
         <Tabbar/>
       </div>

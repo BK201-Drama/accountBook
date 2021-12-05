@@ -124,6 +124,7 @@ export default function MyZone () {
       <Dialog
         visible={showGen}
         title="更换性别"
+        showCancelButton={true}
         onConfirm={async () => {
           const response = await MyZoneAPI.uploadGender({
             id: res.id,
@@ -141,6 +142,9 @@ export default function MyZone () {
           console.log("response", response)
           setShowGen(false)
         }}
+        onCancel={() => {
+          setShowGen(false)
+        }}
       >
         <Radio.Group value={RadioValue}>
           <Cell.Group>
@@ -149,6 +153,7 @@ export default function MyZone () {
           </Cell.Group>
         </Radio.Group>
       </Dialog>
+      {/* 后续有时间再来补充吧 */}
       <Dialog></Dialog>
       <Dialog></Dialog>
     </ConfigProvider>
