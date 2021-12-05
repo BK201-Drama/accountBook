@@ -1,4 +1,5 @@
-const str1 = '1'
-const str2 = '1.23'
-
-console.log(parseFloat(str1))
+const str = 'changhuanfeiyong@2x.png'
+const str_ = str.split('@2x')
+str_.unshift('sort_')
+const s = str_.join('')
+console.log(s)

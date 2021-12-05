@@ -34,7 +34,7 @@ export default function Login () {
       // 将状态存入store中
       store.dispatch(action)
 
-      navigate('/Booking')
+      navigate('/BillDetails')
     } else {
       Notify.show({
         type: 'danger',

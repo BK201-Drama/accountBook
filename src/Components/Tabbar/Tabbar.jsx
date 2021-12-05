@@ -25,6 +25,7 @@ export default function Tabbar_ () {
       }}
       fixed={true}
       placeholder={true}
+      defaultValue={0}
       >
         <Tabbar.Item icon="home-o">明细</Tabbar.Item>
         <Tabbar.Item icon="search">

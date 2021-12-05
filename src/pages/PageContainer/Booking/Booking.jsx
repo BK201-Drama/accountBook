@@ -1,65 +1,53 @@
-import React from 'react'
-import { Tabs, Grid, Swiper, NumberKeyboard } from 'react-vant';
+import React, { useEffect, useState } from 'react'
+import { Icon, Tabs, Grid, NumberKeyboard, Image } from 'react-vant'
+import * as BookingAPI from '../../../api/Booking/BookingAPI'
+import store from '../../../redux/store'
 
 export default function Booking () {
+
+  const res = store.getState()
+
+  console.log(res)
+
+  const [listOut, setListOut] = useState([])
+  const [listIn, setListIn] = useState([])
+
+  useEffect(async () => {
+    var dat = await BookingAPI.getList(res.id)
+    await setListOut(dat.outSortlis)
+    await setListIn(dat.inSortlis)
+  }, [])
+
   return (
     <>
-
       <Tabs active="active">
         <Tabs.TabPane title="支出">
-
-          <Swiper className="my-swipe" autoplay={3000}>
-            <Swiper.Item>
-              <Grid border={false} columnNum={4}> 
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'} onClick={() => {console.log(456)}}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字1" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-              </Grid>
-            </Swiper.Item>
-            <Swiper.Item>
-              <Grid border={false} columnNum={4}>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'} onClick={() => {}}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-              </Grid>
-            </Swiper.Item>
-            <Swiper.Item>
-              <Grid border={false} columnNum={4}>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'} onClick={() => {}}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-                <Grid.Item text="文字3" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-              </Grid>
-            </Swiper.Item>
-          </Swiper>
+          <Grid border={false} columnNum={4}>
+            {
+              listOut.map((item) => {
+                const name_ = `${item.sortName}`
+                return <Grid.Item 
+                  text={name_} 
+                  icon={<Image src="require('../../../assets/img/LoginBackground.png')"/>}
+                  onClick={async () => {
+                    console.log(item)
+                  }}
+                />
+              })
+            }
+          </Grid>
 
         </Tabs.TabPane>
 
         <Tabs.TabPane title="收入">
 
         <Grid border={false} columnNum={4}>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
-          <Grid.Item text="文字2" icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'}/>
+          {
+            listIn.map((item) => {
+              const name_ = `${item.sortName}`
+              return <Grid.Item text={name_} icon={'https://b.yzcdn.cn/vant/icon-demo-1126.png'} onClick={() => {console.log(456)}}/>
+            })
+          }
         </Grid>
 
         </Tabs.TabPane>
@@ -67,9 +55,18 @@ export default function Booking () {
 
       <NumberKeyboard 
         theme="custom" 
-        extraKey={['00', '.', '+', '-']} 
-        closeButtonText="完成" 
-        visible={true}
+        extraKey={['.', <Icon name="calendar-o"/>]}
+        closeButtonText="完成"
+        visible={false}
+        onInput={(v) => {
+
+          if(typeof v !== 'string' && typeof v !== 'number') {
+            console.log('你是日历')
+          } else {
+            console.log(v)
+          }
+        }}
+        // hideOnClickOutside={true}
       />
     </>
   )
