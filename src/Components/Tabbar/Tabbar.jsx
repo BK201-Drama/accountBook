@@ -16,16 +16,16 @@ export default function Tabbar_ () {
   return (
     <ConfigProvider themeVars={themeVars}>
       <Tabbar onChange={(v) => {
-        // if(v === 0) {
-        //   navigate('/BillDetails')
-        // }
         switch (v) {
           case 0: navigate('/BillDetails');break
           case 1: navigate('/Charts');break
           case 2: navigate('/Booking');break
           case 3: navigate('/MyZone');break
         }
-      }}>
+      }}
+      fixed={true}
+      placeholder={true}
+      >
         <Tabbar.Item icon="home-o">明细</Tabbar.Item>
         <Tabbar.Item icon="search">
           图表

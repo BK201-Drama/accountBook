@@ -16,6 +16,6 @@ export async function userForgetPw (info) {
 }
 
 export async function resetPw (info) {
-  var {data: res} = await axios.get(`user/changePw?username=${info.username}&password=${info.password}$code=${info.code}`)
+  var {data: res} = await axios.get(`user/changePw?username=${info.username}&password=${info.password}&code=${info.code}`)
   return res
 }

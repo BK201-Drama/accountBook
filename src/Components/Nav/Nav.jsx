@@ -12,6 +12,8 @@ export default function Nav_ () {
     <ConfigProvider themeVars={themeVars}>
       <NavBar
         title="钱多多记账"
+        fixed={true}
+        placeholder={true}
         // leftArrow
         // rightText="按钮"
         // onClickLeft={() => Toast.info('返回')}
@@ -19,4 +21,4 @@ export default function Nav_ () {
       />
     </ConfigProvider>
   )
-}
+} 

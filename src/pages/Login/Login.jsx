@@ -7,15 +7,17 @@ import './Login.css'
 import * as LoginAPI from '../../api/Login/LoginAPI'
 import { useNavigate } from 'react-router-dom'
 
+import store from '../../redux/store'
+
 export default function Login () {
 
   // 不知为什么，好像用了v6的react-router-dom之后，this.props.history.push在类组件里面没有...因此我们需要操作
   const navigate = useNavigate()
 
   const onFinish = async (value) => {
-    console.log(value)
+    // console.log(value)
     const res = await LoginAPI.userLogin(value)
-    console.log(res)
+    // console.log(res)
 
     if(res.status < 200) {
       Notify.show({
@@ -23,6 +25,15 @@ export default function Login () {
         message: "登录成功",
         duration: 1000
       })
+
+      const action = {
+        type: 'store',
+        data: res
+      }
+
+      // 将状态存入store中
+      store.dispatch(action)
+
       navigate('/Booking')
     } else {
       Notify.show({

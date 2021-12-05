@@ -12,6 +12,7 @@ axios.interceptors.request.use(config => {
 // 响应拦截
 axios.interceptors.response.use(config => {
   console.log("接收请求的拦截")
+  // console.log(config.headers.SetCookies)
   return config
 })
 

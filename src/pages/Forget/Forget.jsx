@@ -20,6 +20,9 @@ export default function Forget () {
 
     await setUsername(value.username)
     await setMail(value.mail)
+    const res = await LoginAPI.userForgetPw(value)
+    // console.log(res)
+    await setCode(res.mailcode)
   }
 
   const setVisible = async () => {
@@ -46,15 +49,16 @@ export default function Forget () {
 
   const submitNewPassword = async (value) => {
     const obj = {
-      ...value,
-      username: username
+      username: username,
+      password: value.password,
+      code: value.code
     }
-    console.log("obj", obj)
 
     const res = await LoginAPI.resetPw(obj)
-    console.log(res)
+
     if (res.status < 200) {
       Toast.success('修改成功')
+      await setShow(!show)
       navigate('/user/login')
     } else {
       Toast.fail('错误，请重试')
@@ -110,7 +114,7 @@ export default function Forget () {
         onFinish={ submitNewPassword }
         footer={
           <div style={{ margin: '16px 16px 0' }}>
-            <Button round nativeType="submit" type="primary" block onClick={() => {setShow(!show)}}>
+            <Button round nativeType="submit" type="primary" block>
               修改密码
             </Button>
           </div>
@@ -127,7 +131,7 @@ export default function Forget () {
           name="code"
           label="请输入验证码"
         >
-          <PasswordInput type="number" mask={false} length={6} onSubmit={() => {}}/>
+          <Field placeholder="请输入验证码"/>
         </Form.Item>
       </Form>
     </Popup>
