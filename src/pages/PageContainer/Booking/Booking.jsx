@@ -34,7 +34,7 @@ export default function Booking () {
                   text={name_}
                   key={name_}
                   // 图片最好只要50px的
-                  icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                  // icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
                   onClick={async () => {
                     console.log(item)
                     setKeyBoardVisible(true)
@@ -56,7 +56,7 @@ export default function Booking () {
               return <Grid.Item 
                 text={name_} 
                 key={name_}
-                icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                // icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
                 onClick={() => {console.log(456)}}
               />
             })
@@ -65,7 +65,7 @@ export default function Booking () {
 
         </Tabs.TabPane>
       </Tabs>
-{/* 
+
       <NumberKeyboard 
         title={<Field/>}
         // delete={<Field/>}
@@ -85,7 +85,7 @@ export default function Booking () {
           setKeyBoardVisible(false)
         }}
         // hideOnClickOutside={true}
-      /> */}
+      />
     </>
   )
 }
