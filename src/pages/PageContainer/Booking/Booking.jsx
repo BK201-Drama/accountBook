@@ -8,7 +8,7 @@ export default function Booking () {
 
   const res = store.getState()
 
-  console.log(res)
+  // console.log(res)
 
   const [listOut, setListOut] = useState([])
   const [listIn, setListIn] = useState([])
@@ -34,7 +34,7 @@ export default function Booking () {
                   text={name_}
                   key={name_}
                   // 图片最好只要50px的
-                  // icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                  icon={<Image src={require(`../../../assets/img/typeList/sort_bangong.png`).default}/>}
                   onClick={async () => {
                     console.log(item)
                     setKeyBoardVisible(true)
@@ -56,7 +56,8 @@ export default function Booking () {
               return <Grid.Item 
                 text={name_} 
                 key={name_}
-                // icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                
                 onClick={() => {console.log(456)}}
               />
             })
