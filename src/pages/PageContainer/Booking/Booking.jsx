@@ -87,7 +87,10 @@ export default function Booking () {
             console.log(v)
           }
         }}
-        onClose={() => {console.log(typeof costValue, costValue)}}
+        onClose={() => {
+          console.log(typeof costValue, costValue)
+          
+        }}
         onChange={setCostValue}
         onBlur={async () => {
           setKeyBoardVisible(false)
