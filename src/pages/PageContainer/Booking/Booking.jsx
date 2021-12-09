@@ -8,6 +8,8 @@ export default function Booking () {
 
   const res = store.getState()
 
+  const [selectedItem, setSelectedItem] = useState()
+
   // console.log(res)
 
   const [listOut, setListOut] = useState([])
@@ -20,6 +22,7 @@ export default function Booking () {
   }, [])
 
   const [keyBoardVisible, setKeyBoardVisible] = useState(false)
+  const [costValue, setCostValue] = useState('0.00')
 
   return (
     <>
@@ -29,14 +32,16 @@ export default function Booking () {
             {
               listOut.map((item) => {
                 const name_ = `${item.sortName}`
+                const src_ = `http://106.55.188.184:8080/ssmBillBook/upload/typeList/${transPic(item.sortImg)}`
                 
                 return <Grid.Item
                   text={name_}
                   key={name_}
                   // 图片最好只要50px的
-                  icon={<Image src={require(`../../../assets/img/typeList/sort_bangong.png`).default}/>}
+                  icon={<Image src={src_}/>}
                   onClick={async () => {
                     console.log(item)
+                    setSelectedItem(item)
                     setKeyBoardVisible(true)
                   }}
                   hideOnClickOutside={true}
@@ -56,7 +61,7 @@ export default function Booking () {
               return <Grid.Item 
                 text={name_} 
                 key={name_}
-                icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
+                // icon={<Image src={require(`../../../assets/img/typeList/${transPic(item.sortImg)}`).default}/>}
                 
                 onClick={() => {console.log(456)}}
               />
@@ -68,8 +73,8 @@ export default function Booking () {
       </Tabs>
 
       <NumberKeyboard 
-        title={<Field/>}
-        // delete={<Field/>}
+        title={<Field label="  " readonly value={costValue}/>}
+        value={costValue}
         theme="custom" 
         extraKey={['.', <Icon name="calendar-o"/>]}
         closeButtonText="完成"
@@ -82,10 +87,11 @@ export default function Booking () {
             console.log(v)
           }
         }}
+        onClose={() => {console.log(typeof costValue, costValue)}}
+        onChange={setCostValue}
         onBlur={async () => {
           setKeyBoardVisible(false)
         }}
-        // hideOnClickOutside={true}
       />
     </>
   )
