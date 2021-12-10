@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Icon, Tabs, Grid, NumberKeyboard, Image, Field, DatetimePicker, Dialog } from 'react-vant'
+import { Icon, Tabs, Grid, NumberKeyboard, Image, Field, DatetimePicker, Dialog, Toast } from 'react-vant'
 import * as BookingAPI from '../../../api/Booking/BookingAPI'
 import store from '../../../redux/store'
 import transPic from '../../../utils/transPic'
@@ -35,7 +35,7 @@ export default function Booking () {
   const [costValue, setCostValue] = useState('0.00')
 
   // 控制时间选择器
-  const [time, setTime] = useState(1639109113)
+  const [time, setTime] = useState()
 
   return (
     <>
@@ -132,7 +132,13 @@ export default function Booking () {
             content: 'none',
             income: tab
           })
-          console.log('请求结果:', re)
+
+          if(re !== null) {
+            Toast.success({
+              message: '添加成功',
+              duration: 1000
+            })
+          }
         }}
         onChange={setCostValue}
         onBlur={async () => {
@@ -160,6 +166,7 @@ export default function Booking () {
           }}
           onConfirm={async (value) => {
             await setTime(value)
+            await setKeyBoardVisible(true)
             await setPopup(false)
           }}
         />
