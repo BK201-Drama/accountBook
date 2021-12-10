@@ -122,13 +122,14 @@ export default function Booking () {
           }
         }}
         onClose={async () => {
+          console.log(time)
           console.log(typeof res.id, res.id)
           const re = await BookingAPI.addBook({
             userId: res.id,
             sortid: selectedItem.id,
             payid: 1,
             cost: parseFloat(costValue),
-            crdate: 1512565107000,
+            crdate: '2021-1-1%2020:58:23',
             content: 'none',
             income: tab
           })

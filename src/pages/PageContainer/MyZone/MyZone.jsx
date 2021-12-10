@@ -60,7 +60,6 @@ export default function MyZone () {
           rightIcon={<Icon name={url} size="55px"/>} 
           label="点击即可更换头像"
           onClick={async () => {
-            await setUrl('https://b.yzcdn.cn/vant/icon-demo-1126.png')
             setShowPic(true)
           }}
         />
@@ -74,10 +73,10 @@ export default function MyZone () {
       <Dialog
         visible={showPic}
         title="更换头像"
-        showCancelButton
-        // onCancel={() => setShowPic(false)}
+        showCancelButton={true}
+        showConfirmButton={false}
+        onCancel={() => setShowPic(false)}
         // onConfirm={changePic}
-        footer={<></>}
         messageAlign={"center"}
       >
         <Flex>
