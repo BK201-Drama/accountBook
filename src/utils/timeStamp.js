@@ -9,6 +9,6 @@ export default function translateTimeStamp (date) {
   const h = date.getHours(); //获取小时数
   const m = date.getMinutes(); //获取分钟数
   const s = date.getSeconds(); //获取秒数
-  const str = Y + '-' + M + '-' + D + ' '+ h + ':' + m + ':' + s;
+  const str = Y + '-' + M + '-' + D + ' %20' + h + ':' + m + ':' + s
   return str
 }

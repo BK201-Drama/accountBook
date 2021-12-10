@@ -3,6 +3,7 @@ import { Icon, Tabs, Grid, NumberKeyboard, Image, Field, DatetimePicker, Dialog,
 import * as BookingAPI from '../../../api/Booking/BookingAPI'
 import store from '../../../redux/store'
 import transPic from '../../../utils/transPic'
+import timeStamp from '../../../utils/timeStamp'
 
 export default function Booking () {
 
@@ -129,14 +130,14 @@ export default function Booking () {
             sortid: selectedItem.id,
             payid: 1,
             cost: parseFloat(costValue),
-            crdate: '2021-1-1%2020:58:23',
+            crdate: timeStamp(time),
             content: 'none',
             income: tab
           })
 
           if(re !== null) {
             Toast.success({
-              message: '添加成功',
+              message: '添加成功', 
               duration: 1000
             })
           }
@@ -158,7 +159,7 @@ export default function Booking () {
       >
         <DatetimePicker
           type="date"
-          minDate={new Date(2010, 0, 1)}
+          minDate={new Date(2017, 0, 1)}
           maxDate={new Date(2024, 10, 1)}
           value={time}
           onCancel={async () => {
