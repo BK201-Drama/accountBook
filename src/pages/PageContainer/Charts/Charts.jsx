@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo, memo } from 'react'
 import Charts_ from '../../../Components/Charts/Charts'
 import { Grid, Tabs, Field, Popup, DatetimePicker, Image } from 'react-vant'
 import store from '../../../redux/store'
 import * as BillDetailAPI from '../../../api/BillDetails/BillDetailsAPI'
 import transPicData from '../../../utils/transPicData'
+
+// const Charts_ = memo(Charts__)
 
 export default function Charts (props) {
 
@@ -15,10 +17,8 @@ export default function Charts (props) {
   const [totalOut, setTotalOut] = useState()
   const [totalIn, setTotalIn] = useState()
 
-  const [tmp, setTmp] = useState([])
-  const [data_, setData_] = useState([
-    {value: 1, name: "请选择时间"}
-  ])
+  const [data_, setData_] = useState([])
+  const [data2_, setData2_] = useState([])
 
   // 控制弹窗1
   const [showPicker, setShowPicker] = useState(false)
@@ -26,21 +26,20 @@ export default function Charts (props) {
 
   // 控制弹窗2
   const [showPicker1, setShowPicker1] = useState(false)
-  const [fieldValue1, setFieldValue1] = useState()
+  const [fieldValue1, setFieldValue1] = useState(new Date())
 
-  useEffect(async () => {
-    // const response = await BillDetailAPI.categorizeByType({
-    //   userId: res.id,
-    //   Year: 2021,
-    //   Month: '01'
-    // })
-    // console.log(response)
-    // await setOutSortlist(response.outSortlist)
-    // await setInSortList(response.inSortlist)
-    // await setTotalOut(response.totalOut)
-    // await setTotalIn(response.totalIn)
+  useMemo(() => async () => {
+    const response = await BillDetailAPI.categorizeByType({
+      userId: res.id,
+      Year: 2021,
+      Month: '01'
+    })
+
+    await setOutSortlist(response.outSortlist)
+    await setInSortList(response.inSortlist)
+    await setTotalOut(response.totalOut)
+    await setTotalIn(response.totalIn)
   }, [])
-
 
   useEffect(async () => {
     const year = fieldValue.getFullYear()
@@ -53,32 +52,36 @@ export default function Charts (props) {
     })
 
     await setOutSortlist(response.outSortlist)
-    await setInSortList(response.inSortlist)
     await setTotalOut(response.totalOut)
-    await setTotalIn(response.totalIn)
 
-    console.log('month', month)
-    console.log('newRes', response)
-
-    console.log('outSortlist', outSortlist)
-
-    const t_val = transPicData(outSortlist)
+    const t_val = transPicData(response.outSortlist)
     await setData_(t_val)
-    console.log(data_)
+
   }, [fieldValue])
 
-  const data__ = [
-    {value: 235, name: '视频广告'},
-    {value: 274, name: '联盟广告'},
-    {value: 310, name: '邮件营销'},
-    {value: 335, name: '直接访问'}
-  ]
+  useEffect(async () => {
+    const year = fieldValue1.getFullYear()
+    const month = fieldValue1.getMonth() + 1 < 10 ? '0' + (fieldValue1.getMonth() + 1) : fieldValue1.getMonth() + 1
+
+    const response = await BillDetailAPI.categorizeByType({
+      userId: res.id,
+      Year: year,
+      Month: month
+    })
+
+    await setInSortList(response.inSortlist)
+    await setTotalIn(response.totalIn)
+
+    const t_val1 = transPicData(response.inSortlist)
+    await setData2_(t_val1)
+
+  }, [fieldValue1])
 
   return (
 
     <Tabs active="active"
       onChange={(v) => {
-        console.log(v)
+        // console.log(v)
       }}
     >
 
@@ -106,14 +109,15 @@ export default function Charts (props) {
         >
           <DatetimePicker
             showSubmitBtn
-            onConfirm={(value) => {
-              setFieldValue(value)
-              setShowPicker(false)
+            onConfirm={async (value) => {
+              console.log('getmonth', value.getMonth())
+              await setFieldValue(value)
+              await setShowPicker(false)
             }}
             type="year-month"
-            minDate={new Date(2018, 0, 1)}
+            minDate={new Date(2018, 1, 1)}
             maxDate={new Date(2024, 2, 1)}
-            value={new Date()}
+            value={fieldValue}
           />
         </Popup>
 
@@ -144,18 +148,18 @@ export default function Charts (props) {
         >
           <DatetimePicker
             showSubmitBtn
-            onConfirm={(value) => {
-              setFieldValue1(value);
-              setShowPicker1(false);
+            onConfirm={async (value) => {
+              await setFieldValue1(value)
+              await setShowPicker1(false)
             }}
-            type="date"
-            minDate={new Date(2018, 0, 1)}
+            type="year-month"
+            minDate={new Date(2018, 1, 1)}
             maxDate={new Date(2024, 2, 1)}
-            value={new Date()}
+            value={fieldValue1}
           />
         </Popup>
         
-        <Charts_ data={data__} id={"2"}/>
+        <Charts_ data={data2_} id={"2"}/>
 
       </Tabs.TabPane>
 
