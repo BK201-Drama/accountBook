@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import * as echarts from 'echarts'
 
 export default function Charts_ (props) {
-
-  const [dat, setDat] = useState(props.data)
 
   // useEffect(() => {
 

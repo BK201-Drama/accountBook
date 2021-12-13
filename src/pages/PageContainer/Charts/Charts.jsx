@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, memo } from 'react'
 import Charts_ from '../../../Components/Charts/Charts'
-import { Grid, Tabs, Field, Popup, DatetimePicker, Image } from 'react-vant'
+import BarHistogram from '../../../Components/Charts/BarHistogram'
+import { Grid, Tabs, Field, Popup, DatetimePicker, Image, Swiper, Divider } from 'react-vant'
 import store from '../../../redux/store'
 import * as BillDetailAPI from '../../../api/BillDetails/BillDetailsAPI'
 import transPicData from '../../../utils/transPicData'
@@ -61,7 +62,7 @@ export default function Charts (props) {
 
   useEffect(async () => {
     const year = fieldValue1.getFullYear()
-    const month = fieldValue1.getMonth() + 1 < 10 ? '0' + (fieldValue1.getMonth() + 1) : fieldValue1.getMonth() + 1
+    const month = fieldValue1.getMonth() + 1 < 10 ? '0' + (fieldValue1.getMonth() + 1) : fieldValue.getMonth() + 1
 
     const response = await BillDetailAPI.categorizeByType({
       userId: res.id,
@@ -121,7 +122,16 @@ export default function Charts (props) {
           />
         </Popup>
 
-        <Charts_ data={data_} id={"1"}/>
+        {/* <Divider>图像</Divider> */}
+
+        <Swiper className="my-swipe">
+          <Swiper.Item>
+            <Charts_ data={data_} id={"1"}/>
+          </Swiper.Item>
+          <Swiper.Item>
+            <BarHistogram data={data_} id={"3"}/>
+          </Swiper.Item>
+        </Swiper>
 
       </Tabs.TabPane>
 
