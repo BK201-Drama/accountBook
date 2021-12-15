@@ -168,8 +168,15 @@ export default function Charts (props) {
             value={fieldValue1}
           />
         </Popup>
-        
-        <Charts_ data={data2_} id={"2"}/>
+
+        <Swiper className="my-swipe">
+          <Swiper.Item>
+          <Charts_ data={data2_} id={"2"}/>
+          </Swiper.Item>
+          <Swiper.Item>
+            <BarHistogram data={data2_} id={"4"}/>
+          </Swiper.Item>
+        </Swiper>
 
       </Tabs.TabPane>
 
