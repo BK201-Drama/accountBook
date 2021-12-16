@@ -11,3 +11,10 @@ export async function addBook (info) {
   )
   return res
 }
+
+export async function deleteBook (id) {
+  const {data: res} = await axios.get(
+    `bill/delete/${id}`
+  )
+  return res
+}

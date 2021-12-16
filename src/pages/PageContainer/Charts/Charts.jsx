@@ -3,10 +3,9 @@ import Charts_ from '../../../Components/Charts/Charts'
 import BarHistogram from '../../../Components/Charts/BarHistogram'
 import { Grid, Tabs, Field, Popup, DatetimePicker, Image, Swiper, Divider } from 'react-vant'
 import store from '../../../redux/store'
+import yearMonth from '../../../utils/year-month'
 import * as BillDetailAPI from '../../../api/BillDetails/BillDetailsAPI'
 import transPicData from '../../../utils/transPicData'
-
-// const Charts_ = memo(Charts__)
 
 export default function Charts (props) {
 
@@ -92,7 +91,7 @@ export default function Charts (props) {
           readonly
           clickable
           label="日期"
-          value={fieldValue}
+          value={yearMonth(fieldValue)}
           placeholder="选择显示账单日期"
           onClick={() => setShowPicker(true)}
         />
@@ -116,7 +115,7 @@ export default function Charts (props) {
               await setShowPicker(false)
             }}
             type="year-month"
-            minDate={new Date(2018, 1, 1)}
+            minDate={new Date(2017, 1, 1)}
             maxDate={new Date(2024, 2, 1)}
             value={fieldValue}
           />
@@ -140,7 +139,7 @@ export default function Charts (props) {
           readonly
           clickable
           label="日期"
-          value={fieldValue1}
+          value={yearMonth(fieldValue1)}
           placeholder="选择显示账单日期"
           onClick={() => setShowPicker1(true)}
         />
@@ -163,7 +162,7 @@ export default function Charts (props) {
               await setShowPicker1(false)
             }}
             type="year-month"
-            minDate={new Date(2018, 1, 1)}
+            minDate={new Date(2017, 1, 1)}
             maxDate={new Date(2024, 2, 1)}
             value={fieldValue1}
           />
