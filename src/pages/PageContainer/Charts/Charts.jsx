@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, memo } from 'react'
 import Charts_ from '../../../Components/Charts/Charts'
 import BarHistogram from '../../../Components/Charts/BarHistogram'
-import { Grid, Tabs, Field, Popup, DatetimePicker, Image, Swiper, Divider } from 'react-vant'
+import { Grid, Tabs, Field, Popup, DatetimePicker, Image, Swiper, Empty } from 'react-vant'
 import store from '../../../redux/store'
 import yearMonth from '../../../utils/year-month'
 import * as BillDetailAPI from '../../../api/BillDetails/BillDetailsAPI'
@@ -121,16 +121,18 @@ export default function Charts (props) {
           />
         </Popup>
 
-        {/* <Divider>图像</Divider> */}
-
-        <Swiper className="my-swipe">
-          <Swiper.Item>
-            <Charts_ data={data_} id={"1"}/>
-          </Swiper.Item>
-          <Swiper.Item>
-            <BarHistogram data={data_} id={"3"}/>
-          </Swiper.Item>
-        </Swiper>
+        {
+          parseFloat(totalOut) === 0 ? 
+          <Empty description="本月没有消费记录噢"/> :         
+          <Swiper className="my-swipe">
+            <Swiper.Item>
+              <Charts_ data={data_} id={"1"}/>
+            </Swiper.Item>
+            <Swiper.Item>
+              <BarHistogram data={data_} id={"3"}/>
+            </Swiper.Item>
+          </Swiper>
+        }
 
       </Tabs.TabPane>
 
@@ -168,14 +170,18 @@ export default function Charts (props) {
           />
         </Popup>
 
-        <Swiper className="my-swipe">
-          <Swiper.Item>
-          <Charts_ data={data2_} id={"2"}/>
-          </Swiper.Item>
-          <Swiper.Item>
-            <BarHistogram data={data2_} id={"4"}/>
-          </Swiper.Item>
-        </Swiper>
+        {
+          parseFloat(totalIn) === 0 ? 
+          <Empty description="本月没有收入记录噢"/> :         
+          <Swiper className="my-swipe">
+            <Swiper.Item>
+            <Charts_ data={data2_} id={"2"}/>
+            </Swiper.Item>
+            <Swiper.Item>
+              <BarHistogram data={data2_} id={"4"}/>
+            </Swiper.Item>
+          </Swiper>
+        }
 
       </Tabs.TabPane>
 

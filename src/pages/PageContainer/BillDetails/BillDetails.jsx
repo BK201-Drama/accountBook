@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import store from '../../../redux/store'
-import { Image, SwipeCell, Button, Cell, Field, Popup, DatetimePicker, Empty } from 'react-vant'
+import { Image, SwipeCell, Button, Cell, Field, Popup, DatetimePicker, Empty, Divider } from 'react-vant'
 import timeTranslate from '../../../utils/timeTranslate'
 import yearMonth from '../../../utils/year-month'
+import hms from '../../../utils/hms'
 // import Img from '../../../assets/img/typeList/sort_bangong.png'
 
 import * as BillDetailsAPI from '../../../api/BillDetails/BillDetailsAPI'
@@ -70,44 +71,47 @@ export default function BillDetails () {
         list.length === 0 ? 
         <Empty description="本月没有账单记录噢"/> : 
         list.map((item) => {
-          return <>{
-            item.list.map((itm) => {
-              console.log(itm)
-              const charastic = itm.income === true ? '+' : '-'
-              return <SwipeCell
-                rightAction={
-                  <Button 
-                    style={{ height: '100%' }}
-                    square type="danger"
-                    onClick={async () => {
-                      const res = BookingAPI.deleteBook(itm.id)
+          return <>
+            <Divider>{item.time}</Divider>
+            {
+              item.list.map((itm) => {
+                console.log(itm)
+                const charastic = itm.income === true ? '+' : '-'
+                return <SwipeCell
+                  rightAction={
+                    <Button 
+                      style={{ height: '100%' }}
+                      square type="danger"
+                      onClick={async () => {
+                        const res = BookingAPI.deleteBook(itm.id)
 
-                      if (res.status === 100) {
-                        console.log(res)
-                      }
+                        if (res.status === 100) {
+                          console.log(res)
+                        }
 
-                      const year = date.getFullYear()
-                      const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-                      const resq = await BillDetailsAPI.categorizeByDay({
-                        userId: k.id,
-                        Year: year,
-                        Month: month
-                      })
-                      await setList(resq.daylist)
-                    }}
-                  >删除</Button>
-                }
-              >      
-                <Cell 
-                  title={itm.sort.sortName} 
-                  icon="location-o" 
-                  key={itm.id} 
-                  value={`${charastic}${itm.cost}￥`}
-                  label={`${timeTranslate(Date(itm.crdate))}`}
-                />
-              </SwipeCell>
-            })
-          }</>
+                        const year = date.getFullYear()
+                        const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+                        const resq = await BillDetailsAPI.categorizeByDay({
+                          userId: k.id,
+                          Year: year,
+                          Month: month
+                        })
+                        await setList(resq.daylist)
+                      }}
+                    >删除</Button>
+                  }
+                >      
+                  <Cell 
+                    title={itm.sort.sortName} 
+                    icon="location-o" 
+                    key={itm.id} 
+                    value={`${charastic}${itm.cost}￥`}
+                    label={`${hms(itm.crdate)}`}
+                  />
+                </SwipeCell>
+              })
+            }
+          </>
         })
       }
 
