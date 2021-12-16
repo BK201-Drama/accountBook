@@ -126,7 +126,7 @@ export default function BillDetails () {
               await setShowPicker(false)
             }}
             type="year-month"
-            minDate={new Date(2018, 1, 1)}
+            minDate={new Date(2017, 1, 1)}
             maxDate={new Date(2024, 2, 1)}
             value={fieldValue}
           />
