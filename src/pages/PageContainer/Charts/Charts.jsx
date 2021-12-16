@@ -145,7 +145,7 @@ export default function Charts (props) {
           onClick={() => setShowPicker1(true)}
         />
         <Grid border={false} columnNum={1}>
-          <Grid.Item icon="after-sale" text={`支出：${totalIn}￥`} />
+          <Grid.Item icon="after-sale" text={`收入：${totalIn}￥`} />
         </Grid>
 
         <Popup
