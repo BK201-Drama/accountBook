@@ -123,7 +123,7 @@ export default function Charts (props) {
 
         {
           parseFloat(totalOut) === 0 ? 
-          <Empty description="本月没有消费记录噢"/> :         
+          <Empty description="本月没有消费记录噢"/> :     
           <Swiper className="my-swipe">
             <Swiper.Item>
               <Charts_ data={data_} id={"1"}/>

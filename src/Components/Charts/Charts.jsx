@@ -3,20 +3,6 @@ import * as echarts from 'echarts'
 
 export default function Charts_ (props) {
 
-  // useEffect(() => {
-
-  //   var myChart = echarts.init(document.getElementById(props.id))
- 
-  //   myChart.setOption({
-  //     series: [{
-  //       name: '访问来源',
-  //       type: 'pie',    // 设置图表类型为饼图
-  //       radius: '50px',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
-  //       data: dat
-  //     }]
-  //   })
-  // }, [])
-
   useEffect(async () => {
 
     var myChart = echarts.init(document.getElementById(props.id))
