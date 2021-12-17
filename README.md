@@ -6,6 +6,8 @@
 
 项目中的**apk-final**文件夹可以下载文件包
 
+apk-final文件夹里面有my-app文件夹，该文件夹为在HBuilderX环境下开发运行的app文件，apk文件也是从该文件夹打包而来
+
 
 
 ## 技术栈：
