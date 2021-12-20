@@ -20,7 +20,7 @@ export async function uploadPic (info) {
   , {
     headers: {
       'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
-      "Cache-Control": "no-cache"
+      "Cache-Control": "no-store"
     }
   })
   return res

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import store from '../../../redux/store'
 import { Uploader, Icon, Cell, ConfigProvider, Dialog, Toast, Radio, Flex } from 'react-vant'
 import * as MyZoneAPI from '../../../api/MyZone/MyZoneAPI'
@@ -10,7 +10,7 @@ const themeVars = {
 export default function MyZone () {
 
   // redux的公共状态
-  const res = store.getState()
+  const res = store.getState() === undefined ? JSON.parse(window.localStorage.getItem('store')) : store.getState()
   console.log(res)
 
 
@@ -40,7 +40,7 @@ export default function MyZone () {
 
   // 上传图片的
   const [url, setUrl] = useState(
-    res.id > 0 ? 
+    (res.id > 0 && res.image !== null) ? 
     `http://106.55.188.184:8080/ssmBillBook/upload/` + `${res.id}` + `_1514361165324.png` :
     'https://b.yzcdn.cn/vant/icon-demo-1126.png'
   )
@@ -50,6 +50,27 @@ export default function MyZone () {
   // 更改性别的
   const [showGen, setShowGen] = useState(false)
   const [RadioValue, setRadioValue] = useState(res.gender)
+
+  const [isReload, setIsReload] = useState(false)
+
+  useEffect(() => {
+
+    if(isReload === true) {
+      setTimeout(async () => {
+
+        await window.localStorage.setItem('store', JSON.stringify(res))
+        await window.location.reload()
+        await store.dispatch({
+          type: 'store',
+          data: JSON.parse(window.localStorage.getItem('store'))
+        })
+        res = store.getState()
+
+        console.log(res)
+      },100)
+    } else {}
+
+  }, [isReload])
 
   return (
     <ConfigProvider themeVars={themeVars}>
@@ -95,8 +116,8 @@ export default function MyZone () {
 
                 if (resp.status < 200) {
                   await setIsShowUpload(false)
-
-                  await setUrl(`http://106.55.188.184:8080/ssmBillBook/upload/` + `${res.id}` + `_1514361165324.png`)
+                  
+                  await setIsReload(true)
 
                   await setIsShowUpload(true)
                   await setShowPic(false)
